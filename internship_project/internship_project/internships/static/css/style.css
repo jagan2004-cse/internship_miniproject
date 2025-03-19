@@ -1,0 +1,163 @@
+/* Reset and Base Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* Background Image with Fallback Gradient */
+.bg-image {
+    background-image: linear-gradient(135deg, #6b48ff 0%, #00c4b4 100%), url('https://static.vecteezy.com/system/resources/previews/000/625/844/original/geometric-abstract-light-blue-background-for-website-wallpapers-bussines-templates-vector.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+/* Overlay for Readability */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+/* Ensure content is above the overlay */
+.container, .navbar {
+    position: relative;
+    z-index: 2;
+}
+
+/* Content Wrapper */
+.content-wrapper {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 30px;
+    min-height: 70vh;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Card Enhancements */
+.card {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.card-title {
+    font-weight: 700;
+    color: #2c3e50;
+}
+
+/* Stat Cards */
+.stat-card {
+    border-radius: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Gradient Backgrounds */
+.bg-gradient-primary {
+    background: linear-gradient(45deg, #6b48ff, #007bff);
+}
+
+.bg-gradient-success {
+    background: linear-gradient(45deg, #28a745, #218838);
+}
+
+.bg-gradient-info {
+    background: linear-gradient(45deg, #17a2b8, #138496);
+}
+
+/* Form and Button Styling */
+.form-label {
+    font-weight: 500;
+    color: #2c3e50;
+}
+
+.form-control {
+    border-radius: 10px;
+    border-color: #ced4da;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #6b48ff;
+    box-shadow: 0 0 8px rgba(107, 72, 255, 0.3);
+    outline: none;
+}
+
+.btn-custom-success {
+    background-color: #28a745;
+    border-color: #28a745;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-custom-success:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+.btn-outline-primary, .btn-outline-info {
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-primary:hover, .btn-outline-info:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Alert Styling */
+.alert {
+    border-radius: 10px;
+    font-weight: 400;
+    background: rgba(255, 255, 255, 0.95);
+}
+
+/* Table Styling */
+.table {
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.table th, .table td {
+    vertical-align: middle;
+}
+
+.table-primary th, .table-success th {
+    font-weight: 600;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .navbar-nav {
+        text-align: center;
+    }
+    .card {
+        margin: 0 15px;
+    }
+    .content-wrapper {
+        padding: 15px;
+        border-radius: 10px;
+    }
+    .stat-card {
+        margin-bottom: 15px;
+    }
+}

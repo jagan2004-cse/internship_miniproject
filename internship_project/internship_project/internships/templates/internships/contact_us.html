@@ -1,0 +1,52 @@
+{% extends 'internships/base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card animate__animated animate__fadeInUp">
+            <div class="card-body">
+                <h2 class="card-title">Contact Us</h2>
+                <p>Have a question or feedback? Reach out to us!</p>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        {{ form.name }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        {{ form.email }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="subject" class="form-label">Subject</label>
+                        {{ form.subject }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Message</label>
+                        {{ form.message }}
+                    </div>
+                    <button type="submit" class="btn btn-custom-success">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+    .form-control {
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .form-control:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+</style>
+{% endblock %}

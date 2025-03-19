@@ -1,0 +1,180 @@
+{% extends 'internships/base.html' %}
+{% block content %}
+<!-- Carousel Section -->
+<div id="internshipCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <div class="carousel-caption d-none d-md-block animate__animated animate__fadeIn">
+                <h5>Featured Internship: Software Developer</h5>
+                <p>Join a top tech company and kickstart your career!</p>
+                <a href="{% url 'internships:search_internships' %}" class="btn btn-custom">Explore Now</a>
+            </div>
+            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" class="d-block w-100" alt="Software Developer Internship">
+        </div>
+        <div class="carousel-item">
+            <div class="carousel-caption d-none d-md-block animate__animated animate__fadeIn">
+                <h5>Featured Internship: Marketing Intern</h5>
+                <p>Gain hands-on experience in digital marketing.</p>
+                <a href="{% url 'internships:search_internships' %}" class="btn btn-custom">Explore Now</a>
+            </div>
+            <img src="https://images.unsplash.com/photo-1506784897867-8916356a58b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" class="d-block w-100" alt="Marketing Internship">
+        </div>
+        <div class="carousel-item">
+            <div class="carousel-caption d-none d-md-block animate__animated animate__fadeIn">
+                <h5>Featured Internship: Data Analyst</h5>
+                <p>Work with data and unlock new opportunities.</p>
+                <a href="{% url 'internships:search_internships' %}" class="btn btn-custom">Explore Now</a>
+            </div>
+            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" class="d-block w-100" alt="Data Analyst Internship">
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#internshipCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#internshipCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<!-- Hero Section -->
+<section class="hero-section text-center py-5">
+    <div class="container">
+        <h1 class="display-4 text-white animate__animated animate__zoomIn">Welcome to Internship Portal</h1>
+        <p class="lead text-white animate__animated animate__fadeInUp animate__delay-1s">
+            Discover your dream internship, apply easily, and track your applications in one place.
+        </p>
+        <div class="mt-4 animate__animated animate__fadeInUp animate__delay-2s">
+            {% if user.is_authenticated %}
+                <a href="{% url 'internships:dashboard' %}" class="btn btn-custom btn-lg mx-2">Go to Dashboard</a>
+            {% else %}
+                <a href="{% url 'internships:register' %}" class="btn btn-custom-success btn-lg mx-2">Register Now</a>
+                <a href="{% url 'internships:login' %}" class="btn btn-custom btn-lg mx-2">Login</a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<!-- Features Section with Cards -->
+<section class="features-section py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5 animate__animated animate__fadeIn">Why Choose Us?</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card text-center animate__animated animate__slideInLeft">
+                    <div class="card-body">
+                        <i class="bi bi-search display-4 text-primary mb-3 icon-transition"></i>
+                        <h5 class="card-title">Search Internships</h5>
+                        <p class="card-text text-muted">Browse a wide range of internships from top companies.</p>
+                        <a href="{% url 'internships:search_internships' %}" class="btn btn-custom">Explore</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card text-center animate__animated animate__slideInUp">
+                    <div class="card-body">
+                        <i class="bi bi-list-check display-4 text-primary mb-3 icon-transition"></i>
+                        <h5 class="card-title">Track Applications</h5>
+                        <p class="card-text text-muted">Monitor the status of your applications effortlessly.</p>
+                        <a href="{% url 'internships:track_applications' %}" class="btn btn-custom">Track</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card text-center animate__animated animate__slideInRight">
+                    <div class="card-body">
+                        <i class="bi bi-bell display-4 text-primary mb-3 icon-transition"></i>
+                        <h5 class="card-title">Stay Notified</h5>
+                        <p class="card-text text-muted">Get updates on your applications and deadlines.</p>
+                        <a href="{% url 'internships:notifications' %}" class="btn btn-custom">View Notifications</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call-to-Action Section -->
+<section class="cta-section py-5 text-center">
+    <div class="container">
+        <h3 class="text-white animate__animated animate__bounceIn">Ready to Start Your Journey?</h3>
+        <p class="text-white mb-4 animate__animated animate__fadeIn animate__delay-1s">
+            Join thousands of students finding their perfect internship today!
+        </p>
+        <a href="{% url 'internships:register' %}" class="btn btn-custom-success btn-lg animate__animated animate__fadeInUp animate__delay-2s">Get Started</a>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Carousel Styling */
+    .carousel-item img {
+        height: 400px;
+        object-fit: cover;
+        filter: brightness(70%);
+        transition: filter 0.3s ease;
+    }
+    .carousel-item:hover img {
+        filter: brightness(50%);
+    }
+    .carousel-caption {
+        background: rgba(0, 0, 0, 0.6);
+        padding: 15px;
+        border-radius: 10px;
+        transition: transform 0.3s ease;
+    }
+    .carousel-caption:hover {
+        transform: scale(1.05);
+    }
+
+    /* Hero Section Styling */
+    .hero-section {
+        min-height: 50vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(45deg, rgba(0, 123, 255, 0.5), rgba(40, 167, 69, 0.5));
+        transition: background 0.5s ease;
+    }
+    .hero-section:hover {
+        background: linear-gradient(45deg, rgba(0, 123, 255, 0.7), rgba(40, 167, 69, 0.7));
+    }
+    .hero-section h1 {
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        transition: transform 0.3s ease;
+    }
+    .hero-section h1:hover {
+        transform: scale(1.05);
+    }
+
+    /* Features Section Styling */
+    .features-section {
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 15px;
+        margin: 20px 0;
+        transition: background-color 0.3s ease;
+    }
+    .features-section:hover {
+        background-color: rgba(255, 255, 255, 1);
+    }
+    .icon-transition {
+        transition: transform 0.3s ease, color 0.3s ease;
+    }
+    .icon-transition:hover {
+        transform: rotate(15deg);
+        color: #0056b3;
+    }
+
+    /* CTA Section Styling */
+    .cta-section {
+        background: linear-gradient(45deg, #007bff, #28a745);
+        border-radius: 15px;
+        transition: transform 0.3s ease;
+    }
+    .cta-section:hover {
+        transform: scale(1.02);
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'internships/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="card animate__animated animate__fadeInUp">
+            <div class="card-body">
+                <h2 class="card-title">Track Tasks</h2>
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+                {% if tasks %}
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>Assigned To</th>
+                                <th>Deadline</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for task in tasks %}
+                            <tr>
+                                <td>{{ task.title }}</td>
+                                <td>{{ task.description|truncatechars:50 }}</td>
+                                <td>{{ task.assigned_to.username }}</td>
+                                <td>{{ task.deadline }}</td>
+                                <td>{{ task.status }}</td>
+                                <td>
+                                    {% if task.assigned_to == request.user or request.user.is_superuser %}
+                                        <a href="{% url 'internships:update_task_status' task.id %}" class="btn btn-primary btn-sm">Update Status</a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p>No tasks assigned.</p>
+                {% endif %}
+                {% if request.user.is_superuser %}
+                    <a href="{% url 'internships:assign_task' %}" class="btn btn-success mt-3">Assign New Task</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

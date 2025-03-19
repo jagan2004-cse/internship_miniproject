@@ -1,0 +1,81 @@
+{% extends 'internships/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card animate__animated animate__fadeInUp">
+            <div class="card-body">
+                <h2 class="card-title">Search Internships</h2>
+                <form method="post" class="mb-4">
+                    {% csrf_token %}
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="query" placeholder="Search by title or company..." value="{{ request.POST.query }}">
+                        <button type="submit" class="btn btn-custom">Search</button>
+                    </div>
+                </form>
+                <div class="row">
+                    {% for internship in internships %}
+                    <div class="col-md-6 mb-3">
+                        <div class="card animate__animated animate__fadeIn">
+                            <img src="{% if internship.image %}{{ internship.image.url }}{% else %}{% static 'images/default_internship.jpg' %}{% endif %}" class="card-img-top img-fluid" alt="{{ internship.title }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ internship.title }}</h5>
+                                <p class="card-text">{{ internship.company }} | {{ internship.location }}</p>
+                                <a href="{% url 'internships:apply_internship' internship.id %}" class="btn btn-custom-success">Apply</a>
+                                <a href="{% url 'internships:add_review' internship.id %}" class="btn btn-custom-primary btn-sm mt-2">Add Review</a>
+                                <!-- Display Reviews -->
+                                <div class="mt-3">
+                                    <h6>Reviews:</h6>
+                                    {% if internship.reviews %}
+                                        {% for review in internship.reviews %}
+                                            <div class="review mb-2 p-2 border rounded">
+                                                <p><strong>{{ review.user.username }}</strong> ({{ review.rating }} Stars)</p>
+                                                <p>{{ review.comment }}</p>
+                                                <small>{{ review.created_at|date:"F d, Y" }}</small>
+                                            </div>
+                                        {% endfor %}
+                                    {% else %}
+                                        <p>No reviews yet. Be the first to review!</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <p class="text-center">No internships found.</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+    .card-img-top {
+        object-fit: cover;
+        height: 150px;
+        transition: transform 0.3s ease, filter 0.3s ease;
+    }
+    .card:hover .card-img-top {
+        transform: scale(1.05);
+        filter: brightness(80%);
+    }
+    .input-group .btn-custom {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+    .review {
+        background-color: #f8f9fa;
+    }
+</style>
+{% endblock %}

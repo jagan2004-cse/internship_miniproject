@@ -1,0 +1,27 @@
+{% extends 'internships/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card animate__animated animate__fadeInUp">
+            <div class="card-body">
+                <h2 class="card-title">Submit Your Resume</h2>
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="id_resume" class="form-label">Upload Resume</label>
+                        <input type="file" class="form-control" name="resume" id="id_resume" required>
+                    </div>
+                    <button type="submit" class="btn btn-custom-success">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

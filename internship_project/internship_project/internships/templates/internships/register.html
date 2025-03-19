@@ -1,0 +1,75 @@
+{% extends 'internships/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card animate__animated animate__fadeInUp">
+            <div class="card-body">
+                <h2 class="card-title">Register</h2>
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                {% if form.errors %}
+                    <div class="alert alert-danger">
+                        {% for error in form.non_field_errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                        {% for field in form %}
+                            {% if field.errors %}
+                                {% for error in field.errors %}
+                                    <p>{{ field.label }}: {{ error }}</p>
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="id_username" class="form-label">Username</label>
+                        {{ form.username }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_email" class="form-label">Email</label>
+                        {{ form.email }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_password1" class="form-label">Password</label>
+                        {{ form.password1 }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_password2" class="form-label">Confirm Password</label>
+                        {{ form.password2 }}
+                    </div>
+                    <button type="submit" class="btn btn-custom-success">Register</button>
+                    <p class="mt-2">Already have an account? <a href="{% url 'internships:login' %}">Login</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+    .form-control {
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .form-control:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+</style>
+{% endblock %}

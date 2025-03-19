@@ -1,0 +1,16 @@
+{% extends 'internships/base.html' %}
+{% block content %}
+<h2 class="mb-4 text-center animate__animated animate__fadeIn">Notifications</h2>
+<div class="list-group">
+    {% for notification in notifications %}
+    <a href="#" class="list-group-item list-group-item-action {% if not notification.is_read %}list-group-item-primary{% endif %} animate__animated animate__fadeInUp">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{ notification.message }}</h5>
+            <small class="text-muted">{{ notification.created_at|timesince }} ago</small>
+        </div>
+    </a>
+    {% empty %}
+    <div class="alert alert-info text-center animate__animated animate__fadeIn">No notifications yet.</div>
+    {% endfor %}
+</div>
+{% endblock %}

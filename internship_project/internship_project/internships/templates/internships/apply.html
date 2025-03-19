@@ -1,0 +1,43 @@
+{% extends 'internships/base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card animate__animated animate__fadeInUp">
+            <div class="card-body">
+                <h2 class="card-title">{{ internship.title }}</h2>
+                <p class="card-text"><strong>Company:</strong> {{ internship.company }}</p>
+                <p class="card-text"><strong>Location:</strong> {{ internship.location }}</p>
+                <p class="card-text"><strong>Description:</strong> {{ internship.description }}</p>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="resume" class="form-label">Upload Your Resume</label>
+                        <input type="file" class="form-control" id="resume" name="resume" accept=".pdf,.doc,.docx" required>
+                        <small class="form-text text-muted">Accepted formats: PDF, DOC, DOCX</small>
+                    </div>
+                    <button type="submit" class="btn btn-custom-success">Apply Now</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+    .form-control {
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .form-control:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+</style>
+{% endblock %}

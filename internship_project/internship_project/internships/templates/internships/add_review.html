@@ -1,0 +1,43 @@
+{% extends 'internships/base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card animate__animated animate__fadeInUp">
+            <div class="card-body">
+                <h2 class="card-title">Review {{ internship.title }}</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="rating" class="form-label">{{ form.rating.label }}</label>
+                        {{ form.rating }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="comment" class="form-label">{{ form.comment.label }}</label>
+                        {{ form.comment }}
+                    </div>
+                    <button type="submit" class="btn btn-custom-success">Submit Review</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+    .form-control, .form-select {
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .form-control:focus, .form-select:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+</style>
+{% endblock %}
